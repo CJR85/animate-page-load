@@ -2,6 +2,7 @@ body {
   margin: 0;
   --nav-load-time: 300ms;
   --navlink-load-time: 500ms;
+  --article-load-delay: calc(var(--nav-load-time) + var(--navlink-load-time));
 }
 
 nav {
@@ -49,6 +50,20 @@ nav a {
 
 main {
   padding: 30px;
+}
+
+h1 {
+  animation: article-load 300ms ease-in var(--article-load-delay);
+  animation-fill-mode: forwards;
+  transform: translateY(-20px);
+  opacity: 0;
+}
+
+p {
+  animation: article-load 300ms ease-in calc(var(--article-load-delay) + 200ms);
+  animation-fill-mode: forwards;
+  transform: translateY(-20px);
+  opacity: 0;
 }
 
 @keyframes nav-load {
@@ -100,5 +115,17 @@ main {
 
   100% {
     transform: translateX(0);
+  }
+}
+
+@keyframes article-load {
+  0% {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+
+  100% {
+    transform: translateY(0px);
+    opacity: 1;
   }
 }
